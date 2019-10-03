@@ -15,22 +15,19 @@ def webhook():
     if request.method == 'POST':
         return "OK"
 
-@app.route('/callback', methods=['POST'])
+    @app.route('/callback', methods=['POST'])
 def callback():
     json_line = request.get_json()
     json_line = json.dumps(json_line)
     decoded = json.loads(json_line)
     user = decoded['originalDetectIntentRequest']['payload']['data']['replyToken']
-    userText = decoded['queryResult']['intent']['displayName']
     userText = decoded["events"][0]['message']['text']
-    # sendText(user,userText)
-    if (userText == 'ไอ้บ้า') :
+   if (userText == 'ไอ้บ้า') :
         sendText(user'ไอ้บอ')
     elif (userText == 'หล่อเกิ๊น') :
         sendText(user'ก็หล่ออ่ะค้าบ')
     else :
         sendText(user'ไม่เข้าใจพูดใหม่นะ')
-
     return '',200
 
 def sendText(user, text):
